@@ -2,12 +2,12 @@ import sys, pathlib
 from os import walk
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
-from JLAF import Ui_myfirstgui
+from JLAF import Ui_MainWindow
 
-class MyFirstGuiProgram(Ui_myfirstgui):
+class MyFirstGuiProgram(Ui_MainWindow):
 	
 	def __init__(self, dialog):
-		Ui_myfirstgui.__init__(self)
+		Ui_MainWindow.__init__(self)
 		self.setupUi(dialog)
 	
 		self.fname = ""
