@@ -9,14 +9,15 @@ class MyFirstGuiProgram(Ui_myfirstgui):
 		Ui_myfirstgui.__init__(self)
 		self.setupUi(dialog)
 	
-		fname = ""
+		self.fname = ""
+		self.directory = ""
 
 		self.actionOpen_File.triggered.connect(self.showOpenFile)
 		self.commandLinkButton.clicked.connect(self.analyzeLogs)
 
 	def showOpenFile(self):
 
-		self.fname = QFileDialog.getOpenFileName(dialog, 'Open file', 'C:\cygwin64\home')
+		self.fname = QFileDialog.getOpenFileName(dialog, 'Open file')
 		self.label_3.setText(str(self.fname[0]))
 		
 	def analyzeLogs(self):
