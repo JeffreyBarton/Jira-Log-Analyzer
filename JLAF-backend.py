@@ -29,8 +29,7 @@ class MyFirstGuiProgram(Ui_MainWindow):
 
 		self.activeFile = str(self.fname[0])
 		self.fileWatcher.addPath(self.activeFile)
-		print(self.fileWatcher.files())
-
+		
 		self.label_3.setText(self.activeFile)
 
 		self.listWidget_2.clear()
@@ -47,8 +46,6 @@ class MyFirstGuiProgram(Ui_MainWindow):
 		self.activeFile = str(str(self.directory) + "\\" + str(self.listWidget_2.currentItem().text()))
 
 		self.fileWatcher.addPath(self.activeFile)
-		print(self.fileWatcher.files())
-
 
 		self.label_3.setText(self.activeFile)
 
