@@ -14,16 +14,25 @@ class MyFirstGuiProgram(Ui_MainWindow):
 		self.activeFile = ""
 		self.directory = ""
 
+		self.fileWatcher = QtCore.QFileSystemWatcher()
+
 		self.actionOpen_File.triggered.connect(self.showOpenFile)
 		self.commandLinkButton.clicked.connect(self.analyzeLogs)
 		self.listWidget_2.itemClicked.connect(self.changeActiveFile)
+		self.fileWatcher.fileChanged.connect(self.fileChanged)
 		
+	def fileChanged(self):
+		self.label_3.setText(self.activeFile + " CHANGED")
 
 	def showOpenFile(self):
-
 		self.fname = QFileDialog.getOpenFileName(dialog, 'Open file')
+
 		self.activeFile = str(self.fname[0])
+		self.fileWatcher.addPath(self.activeFile)
+		print(self.fileWatcher.files())
+
 		self.label_3.setText(self.activeFile)
+
 		self.listWidget_2.clear()
 		f = []
 		for (dirpath, dirnames, filenames) in walk(str(self.getDir(self.activeFile))):
@@ -33,7 +42,14 @@ class MyFirstGuiProgram(Ui_MainWindow):
 
 	def changeActiveFile(self):
 		#print(str(self.directory) + "\\" + str(self.listWidget_2.currentItem().text()))
+		self.fileWatcher.removePath(self.activeFile)
+
 		self.activeFile = str(str(self.directory) + "\\" + str(self.listWidget_2.currentItem().text()))
+
+		self.fileWatcher.addPath(self.activeFile)
+		print(self.fileWatcher.files())
+
+
 		self.label_3.setText(self.activeFile)
 
 	def analyzeLogs(self):
